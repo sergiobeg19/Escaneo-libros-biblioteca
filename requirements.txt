@@ -1,0 +1,7 @@
+Flask
+pyTelegramBotAPI
+google-genai
+gspread
+oauth2client
+pillow
+gunicorn
