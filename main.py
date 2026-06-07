@@ -23,47 +23,7 @@ ai_client = genai.Client(api_key=GEMINI_API_KEY)
 # 3. Configuración de Google Sheets con bloque PEM limpio
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
-google_creds_info = {
-    "type": "service_account",
-    "project_id": "gen-lang-client-0288547052",
-    "private_key_id": "5fce2b4b838571158f656c7cd7deb8e10e4d8586",
-    "private_key": "-----BEGIN PRIVATE KEY-----\n"
-    "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC6ZQu3ECSljKZg\n"
-    "EJiDJwoI6mkFj4E0laRxLQWcVdnI8fHwD4AtdBrbRhSj1AODjd4xLf89z/+0zka5\n"
-    "/0RWO1FZYq1CyXY5kghG8onSFHnas0BhkGaLJ31ylQo+a7mvzkHmkRnoHhQ9Hvj9\n"
-    "s6PowP5yhUidPsLPIS3rwehdq/l5gbfSI49k7H2H/qKBxkjmuJ30zfVwl6xgLgwd\n"
-    "Am4jHjbLKq6su7nvrjEXH5n/gFMgyPfro+7r9HWf/SpJT+sl84dun1oOEYe3d6ax\n"
-    "i1rD0+3RPHS7oc/gUlDWwprehpMZQFBTP6tdMk/JUrzr0JnzKOEaBszF2Wti1Edh\n"
-    "O4+UYEqFAgMBAAECggEACMp5uY35xdNi8xPCoag5HVpdjtJ/FpllKqT5MgT23cw9\n"
-    "a86grg7JsnmfwRSfgCL0La/HQpAkCvq8lAqhm4s2JxKpQcW0fVAcHakpjgktsGkf\n"
-    "r5+gGnmHvYb2d02yMa63EHZbpAUr0VsmhU6lkSAYZWh7AtbiLg3Y94N1ylnb96/t\n"
-    "boKsrymgdCiBTs487xxESyF/HwdeMCB7tJ8qZPEwVmdn35DixocouF62apeSppi2\n"
-    "pFyvWbawa7/SKtxmgjFnbCBUZXNyQv+pCoVLrd8BSBlKK/MiAv5g/7boG5sKdUB\n"
-    "hwcUerb8cISsP+h3/6XyGnmSS8EgAdou1i7qFrgq+QKBgQDr8oNUOg8cQKVAJC6X\n"
-    "X7rhwDvOuJutqF55R4rcjnCpTCM8j9Tee7AC+mAFNCY8vBhn6WQmgtez4+nf3lfc\n"
-    "bFhM9wB7xkAfuYyGCRyW4DVYcJksuliFWo2yQzcygzhFw1ryxfcoVLeKgx6Weqe9\n"
-    "YxDVhp9gKqjP/PymYcnbmYVvyQKBgQDKPGuvLpDpHq+yI9/sVKN+SiLbc22hoAFy\n"
-    "dH3a4mFKaln2kERbcWc2zKgo8KahcI016IDQqDO76cXW+5nfL651ZHGgF+wSfv0+\n"
-    "Ty+QHtaPMq2KoS4idKoeIjYYrWhF7er+yRDeJ+Ee3HFcrX377CnfcAKZUxP4Sv+q\n"
-    "TIZkrCF63QKBgQCpHOgubXK5IEiRQZ23V6D9/6eeUkka3gvgx3tq/BkZ7v1ugfTk\n"
-    "Bikw6T37XNZvP64KhIkI5U0vnZLap2W4ElvzxjIthPofAwIKa+t25Hq3yfSvz1x1\n"
-    "MGNROsYMSWsC7bN5QJUW7imjeLlqx70EjEXblaMT7V+Tu9Nmeb6RzGaMqQKBgF3j\n"
-    "szK/cbNo9bTEhv8XRFgrXwd3DVzOBh33Cz8FfpmnymB4FeRGP97nIOLw5stoj4aJ\n"
-    "jNRSYsJJA/qNEKDXaC1EFqR2trjXkAbPiItmZcJRitQjhGGmvBwFUgwe5Zwhmsny\n"
-    "2wvog9FqEo8uVKESwVXkkLBSK6FIYG3V3Ub7ywdZAoGBAItQTCXC2qUKN5JqdFDP\n"
-    "neteALeZnho6lDtOdBXPDjSt6XPXLVoPffcIVmeJcgcQLG+LWunDhnLfOpKVzVX1A\n"
-    "lmSupmpP2LaTKRdYSS1HWgSoQqOpBhAyQg/dgCCr/I8lQ2cjYCDD0ywUvaqflzaU\n"
-    "/FHwHNGuieUeQIN4SK/Tv0ym\n-----END PRIVATE KEY-----\n",
-    "client_email": "bot-biblioteca@gen-lang-client-0288547052.iam.gserviceaccount.com",
-    "client_id": "111716244385708682011",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bot-biblioteca%40gen-lang-client-0288547052.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
-}
-
-creds = ServiceAccountCredentials.from_json_keyfile_dict(google_creds_info, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 client_sheets = gspread.authorize(creds)
 
 SPREADSHEET_ID = "1Rd-I4-OAXPRQONbO9jyB_zai4PErAx34AvXvX0Dsoac"
