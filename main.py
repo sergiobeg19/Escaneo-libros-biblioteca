@@ -7,6 +7,7 @@ from google.genai import types
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from PIL import Image
+from pydantic import BaseModel  # Nueva importación limpia
 
 # 1. Inicialización de Flask para Render
 app = Flask(__name__)
@@ -29,8 +30,8 @@ client_sheets = gspread.authorize(creds)
 SPREADSHEET_ID = "1Rd-I4-OAXPRQONbO9jyB_zai4PErAx34AvXvX0Dsoac"
 sheet = client_sheets.open_by_key(SPREADSHEET_ID).sheet1
 
-# Definición del esquema estructurado para Gemini con la nueva columna
-class DatosLibro(types.BaseModel):
+# Definición corregida del esquema estructurado para Gemini
+class DatosLibro(BaseModel):
     titulo: str
     autor: str
     anio: str
