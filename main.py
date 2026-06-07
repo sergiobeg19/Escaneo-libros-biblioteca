@@ -25,6 +25,7 @@ scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/au
 # En Render, guardaremos el contenido de tu JSON de Google en una variable llamada GOOGLE_CREDS_JSON
 raw_creds = os.environ.get("GOOGLE_CREDS_JSON").replace("\\n", "\n")
 google_creds_info = json.loads(raw_creds)
+
 creds = ServiceAccountCredentials.from_json_keyfile_dict(google_creds_info, scope)
 client_sheets = gspread.authorize(creds)
 
