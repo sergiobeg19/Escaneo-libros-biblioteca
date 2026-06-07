@@ -1,0 +1,9 @@
+# Credenciales de Google Cloud Service Account
+gen-lang-client-0288547052-5fce2b4b8385.json
+
+# Entorno virtual y temporales
+venv/
+.venv/
+__pycache__/
+*.pyc
+/tmp/
